@@ -42,123 +42,123 @@
 #     - Left curly brackets must be single-quoted: '{'
 #   Messages without arguments shouldn't double single-quotes or quote { brackets.
 
-resources.clay = Clay
-resources.ore = Ore
-resources.sheep = Sheep
-resources.wheat = Wheat
-resources.wood = Wood
+resources.clay = 煉瓦
+resources.ore = 鉱石
+resources.sheep = 羊毛
+resources.wheat = 小麦
+resources.wood = 木材
 
 # spec.* is for SOCStringManager.getSpecial; this section must be identical in the client and server string properties files
 
 # spec.rsrcs.* is for {#,rsrcs}
-spec.rsrcs.aclay = a clay
-spec.rsrcs.aore = an ore
-spec.rsrcs.asheep = a sheep
-spec.rsrcs.awheat = a wheat
-spec.rsrcs.awood = a wood
-spec.rsrcs.aunknown = a resource of unknown type {0}
-spec.rsrcs.1clay = 1 clay
-spec.rsrcs.1ore = 1 ore
-spec.rsrcs.1sheep = 1 sheep
-spec.rsrcs.1wheat = 1 wheat
-spec.rsrcs.1wood = 1 wood
-spec.rsrcs.1unknown = 1 resource of unknown type {0}
-spec.rsrcs.nclay = {0,number} clay
-spec.rsrcs.nore = {0,number} ore
-spec.rsrcs.nsheep = {0,number} sheep
-spec.rsrcs.nwheat = {0,number} wheat
-spec.rsrcs.nwood = {0,number} wood
-spec.rsrcs.nunknown = {0,number} resources of unknown type {1}
-spec.rsrcs.none = nothing
+spec.rsrcs.aclay = 煉瓦
+spec.rsrcs.aore = 鉱石
+spec.rsrcs.asheep = 羊毛
+spec.rsrcs.awheat = 小麦
+spec.rsrcs.awood = 木材
+spec.rsrcs.aunknown = 未知の資材 {0}
+spec.rsrcs.1clay = 1 煉瓦
+spec.rsrcs.1ore = 1 鉱石
+spec.rsrcs.1sheep = 1 羊毛
+spec.rsrcs.1wheat = 1 小麦
+spec.rsrcs.1wood = 1 木材
+spec.rsrcs.1unknown = 1 未知の資材 {0}
+spec.rsrcs.nclay = {0,number} 煉瓦
+spec.rsrcs.nore = {0,number} 鉱石
+spec.rsrcs.nsheep = {0,number} 羊毛
+spec.rsrcs.nwheat = {0,number} 小麦
+spec.rsrcs.nwood = {0,number} 木材
+spec.rsrcs.nunknown = {0,number} 未知の資材 {1}
+spec.rsrcs.none = なし
 # For plural forms: Joe monopolized clay / monopoliz� la madera
-spec.rsrcs.clay = clay
-spec.rsrcs.ore = ore
-spec.rsrcs.sheep = sheep
-spec.rsrcs.wheat = wheat
-spec.rsrcs.wood = wood
-spec.rsrcs.unknown = resources of unknown type {0}
+spec.rsrcs.clay = 煉瓦
+spec.rsrcs.ore = 鉱石
+spec.rsrcs.sheep = 羊毛
+spec.rsrcs.wheat = 小麦
+spec.rsrcs.wood = 木材
+spec.rsrcs.unknown = 未知の資材 {0}
 
 # spec.dcards.* is for {#,dcards}
 #   These are used in SOCDevCard.getCardTypeName, and its server callers messageToGameKeyedSpecial and messageToPlayerKeyedSpecial
-spec.dcards.unknown = unknown card
-spec.dcards.capgovhouse = Gov. House (1VP)
-spec.dcards.discoveryplenty = Year of Plenty
-spec.dcards.knightsoldier = Soldier
-spec.dcards.knightsoldier.warship = Warship
-spec.dcards.market = Market (1VP)
-spec.dcards.monopoly = Monopoly
-spec.dcards.roadbuilding = Road Building
-spec.dcards.temple = Temple (1VP)
-spec.dcards.towerchapel = Chapel (1VP)
-spec.dcards.university = University (1VP)
-spec.dcards.aunknown = an unknown card
-spec.dcards.acapgovhouse = a Gov.House (+1VP)
-spec.dcards.adiscoveryplenty = a Year of Plenty
-spec.dcards.aknightsoldier = a Soldier
-spec.dcards.aknightsoldier.warship = a Warship
-spec.dcards.amarket = a Market (+1VP)
-spec.dcards.amonopoly = a Monopoly
-spec.dcards.aroadbuilding = a Road Building
-spec.dcards.atemple = a Temple (+1VP)
-spec.dcards.atowerchapel = a Chapel (+1VP)
-spec.dcards.auniversity = a University (+1VP)
+spec.dcards.unknown = 未知のカード
+spec.dcards.capgovhouse = 議会 (1VP)
+spec.dcards.discoveryplenty = 発見
+spec.dcards.knightsoldier = 騎士
+spec.dcards.knightsoldier.warship = 軍艦
+spec.dcards.market = 市場 (1VP)
+spec.dcards.monopoly = 独占
+spec.dcards.roadbuilding = 街道建設
+spec.dcards.temple = 図書館 (1VP)
+spec.dcards.towerchapel = 大聖堂 (1VP)
+spec.dcards.university = 大学 (1VP)
+spec.dcards.aunknown = 未知のカード
+spec.dcards.acapgovhouse = 議会 (+1VP)
+spec.dcards.adiscoveryplenty = 発見
+spec.dcards.aknightsoldier = 騎士
+spec.dcards.aknightsoldier.warship = 軍艦
+spec.dcards.amarket = 市場 (+1VP)
+spec.dcards.amonopoly = 独占
+spec.dcards.aroadbuilding = 街道建設
+spec.dcards.atemple = 図書館 (+1VP)
+spec.dcards.atowerchapel = 大聖堂 (+1VP)
+spec.dcards.auniversity = 大学 (+1VP)
 
 # i18n.listitems.* is for I18n.listItems; this section must be identical in the client and server string properties files
 # i18n.listitems.item should have a trailing space to make room before the next item, if the language uses spaces
-i18n.listitems.2 = {0} and {1}
+i18n.listitems.2 = {0} と {1}
 i18n.listitems.item = {0}, 
-i18n.listitems.finalitem = and {0}
-i18n.listitems.nothing = nothing
+i18n.listitems.finalitem = と {0}
+i18n.listitems.nothing = なし
 
-abbr.no=N
-abbr.yes=Y
-base.build=Build
-base.cancel=Cancel
-base.change=Change
-base.clear=Clear
-base.close=Close
-base.emptylist.nothing = nothing
-base.none=None
+abbr.no=いいえ
+abbr.yes=はい
+base.build=作成
+base.cancel=取消
+base.change=交換
+base.clear=消去
+base.close=閉じる
+base.emptylist.nothing = なし
+base.none=なし
 base.none.parens=(none)
-base.no.thanks=No thanks
-base.no.thanks.sentenc=No thanks.
+base.no.thanks=いりません
+base.no.thanks.sentenc=いりません、ありがとう
 base.ok=OK
-base.please.wait=Please wait...
-base.restart=Restart
-base.send=Send
+base.please.wait=お待ち下さい...
+base.restart=再起動
+base.send=送る
 
 # SOCConnectOrPracticePanel; some fields/buttons also used in SOCAccountClient
-pcli.cpp.connect = Connect
-pcli.cpp.connecttoaserv = Connect to a Server
-pcli.cpp.connecttoserv = Connect to Server
+pcli.cpp.connect = 接続
+pcli.cpp.connecttoaserv = サーバーに接続
+pcli.cpp.connecttoserv = サーバーに接続
 pcli.cpp.jsettlers.versionbuild = JSettlers {0} build {1}
-pcli.cpp.nickname = Nickname
-pcli.cpp.password = Password
-pcli.cpp.port = Port
-pcli.cpp.server = Server
-pcli.cpp.start = Start
-pcli.cpp.startserv = Start a Server
-pcli.cpp.welcomeheading = Welcome to JSettlers!  Please choose an option.
+pcli.cpp.nickname = 名前
+pcli.cpp.password = パスワード
+pcli.cpp.port = ポート
+pcli.cpp.server = サーバー
+pcli.cpp.start = 開始
+pcli.cpp.startserv = サーバーで開始
+pcli.cpp.welcomeheading = Welcome to JSettlers!  オプションを選択
 
 # SOCPlayerClient window
-pcli.main.game.info = Game Info
-pcli.main.join.cannot = Cannot join, this client is incompatible with features of this game.
-pcli.main.join.channel = Join Channel
-pcli.main.join.game = Join Game
+pcli.main.game.info = 情報
+pcli.main.join.cannot = クライアントのバージョンが違います。
+pcli.main.join.channel = チャンネルに入る
+pcli.main.join.game = ゲームに入る
 pcli.main.join.neednickname = First enter a nickname, then join a game or channel.
 pcli.main.join.neednickname.g = First enter a nickname, then join a game.
 pcli.main.join.neednickname.2 = You must enter a nickname before you can join a game or channel.
 pcli.main.join.neednickname.g2 = You must enter a nickname before you can join a game.
 pcli.main.label.channels = Channels
 pcli.main.label.games = Games
-pcli.main.label.newchannel = New Channel:
-pcli.main.label.optionalpw = Optional Password:
-pcli.main.label.yournickname = Your Nickname:
-pcli.main.newgame = New Game...
+pcli.main.label.newchannel = 新規チャンネル:
+pcli.main.label.optionalpw = パスワード（オプション）:
+pcli.main.label.yournickname = ニックネーム:
+pcli.main.newgame = 新規ゲーム...
 # Just "Practice", because "Practice Game" text is too wide for button; also used by SOCConnectOrPracticePanel
-pcli.main.practice = Practice
-pcli.main.title = JSettlers client {0}
-pcli.main.title.localserver = JSettlers server {0} - port {1}
+pcli.main.practice = 練習
+pcli.main.title = JSettlers クライアント {0}
+pcli.main.title.localserver = JSettlers サーバ {0} - ポート {1}
 # very short abbreviation to show version
 pcli.main.version = v {0}
 pcli.main.version.tip = Server version is {0} build {1}; client is {2} bld {3}
@@ -166,8 +166,8 @@ pcli.main.version.tip = Server version is {0} build {1}; client is {2} bld {3}
 # PCli.startLocalTCPServer. Note that for TCP port#s we avoid {0,number}
 # and use Integer.toString() so the port number won't be formatted as "8,880".
 pcli.localserver.dialog = Other players connecting to your server\nneed only your IP address and port number.\nNo other server software install is needed.\nMake sure your firewall allows inbound traffic on port {0}.
-pcli.localserver.port = Port: {0}
-pcli.localserver.running = Server is Running. (Click for info)
+pcli.localserver.port = ポート: {0}
+pcli.localserver.running = サーバ起動中 (クリックで情報表示)
 pcli.localserver.running.tip = You are running a server on TCP port {0}. Version {1} bld {2}
 
 # SOCPlayerClient misc error messages:
@@ -325,7 +325,7 @@ hpan.roll.rollorplaycard=Roll or Play Card
 hpan.seat.locked = Seat Locked
 hpan.sit.here=Sit Here
 hpan.sit.lock=Lock
-hpan.sit.lock.tip = Lock to prevent a robot from sitting here.
+hpan.sit.lock.tip = ロックするとロボットがここに参加しますLock to prevent a robot from sitting here.
 hpan.sit.locked=Locked
 hpan.sit.locked.tip = Click to mark or unlock; is locked to prevent a human from taking over this robot.
 hpan.sit.locked.tip.nomark = Click to unlock; is locked to prevent a human from taking over this robot.

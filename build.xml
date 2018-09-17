@@ -233,7 +233,7 @@ pte.version = ${i18neditor.version}
        that tests can be done on compiled classes without creating
        distribution tarballs; includes jsettlers and i18neditor
        because everything is in java.src -->
-  <target name="compile" depends="init-libs,resources,resources-i18neditor"
+  <target name="compile" depends="init-libs,native2ascii,resources,resources-i18neditor"
           description="Compile class files into 'classes'.">
       <!-- ensure latest /resources/version.info for version, build number -->
       <dependset>
@@ -598,6 +598,10 @@ pte.version = ${i18neditor.version}
       </javadoc>
   </target>
 
+  <target name="native2ascii">
+      <native2ascii encoding="UTF8" src="." dest="."
+          includes="**/*.properties.utf8" ext="" />
+  </target>
 
   <!-- ************************************** -->
   <!-- Other targets -->

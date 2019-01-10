@@ -86,8 +86,15 @@ repositories {
 //}
 
 dependencies {
+ 	compile 'com.fasterxml.jackson.core:jackson-core:2.4.4@jar'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.4@jar'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.4@jar'
     testCompile 'junit:junit:4.12'
 }
+
+//dependencies {
+//    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.4'
+//}
 
 artifacts {
     archives serverJar, fullJar

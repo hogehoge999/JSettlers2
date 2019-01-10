@@ -23,6 +23,8 @@ import java.util.StringTokenizer;
 
 import soc.util.SOCFeatureSet;  // for javadocs only
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * This message sends the server's version and features, or client's version and locale,
@@ -53,16 +55,19 @@ public class SOCVersion extends SOCMessage
     /**
      * Version display string, as in {@link soc.util.Version#version()}
      */
+    @JsonProperty
     private String versStr;
 
     /**
      * Version number, as in {@link soc.util.Version#versionNumber()}
      */
+    @JsonProperty
     private int versNum;
 
     /**
      * Version build, or null, as in {@link soc.util.Version#buildnum()}
      */
+    @JsonProperty
     private String versBuild;
 
     /**
@@ -71,6 +76,7 @@ public class SOCVersion extends SOCMessage
      * See class javadoc for handling older servers or clients when this field is null.
      * @since 1.1.19
      */
+    @JsonProperty
     public final String feats;
 
     /**
@@ -79,6 +85,7 @@ public class SOCVersion extends SOCMessage
      * See class javadoc for handling older clients when this field is null.
      * @since 2.0.00
      */
+    @JsonProperty
     public final String cliLocale;
 
     /**
@@ -173,6 +180,15 @@ public class SOCVersion extends SOCMessage
             throw new IllegalArgumentException("null verBuild, non-null feats");
         // don't need to check for null build && non-null cliLocale: that's 2.0.00+ only
 
+        try
+        {
+	        SOCVersion socVersion = new SOCVersion(verNum, verStr, verBuild, feats, cliLocale);
+	        ObjectMapper mapper = new ObjectMapper();
+	        return mapper.writeValueAsString(socVersion);
+        }
+        catch (Exception e)
+        {
+        }
         return VERSION + sep + verNum + sep2 + verStr
             + sep2 + (verBuild != null ? verBuild : EMPTYSTR)
             + sep2 + (feats != null ? feats : EMPTYSTR)
@@ -192,6 +208,17 @@ public class SOCVersion extends SOCMessage
         String bs;  // build string, or null
         String fs = null;  // feats string, or null
         String clo = null;  // cliLocale string, or null
+
+        try
+        {
+        	ObjectMapper mapper = new ObjectMapper();
+        	SOCVersion socver = mapper.readValue(s, SOCVersion.class);
+        	return socver;
+        }
+        catch (Exception e)
+        {
+        	;
+        }
 
         StringTokenizer st = new StringTokenizer(s, sep2);
 

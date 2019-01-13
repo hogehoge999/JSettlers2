@@ -47,6 +47,14 @@ public class SOCAdminReset extends SOCMessage
      */
     public String toCmd()
     {
+        try
+        {
+        	SOCAdminReset soc = new SOCAdminReset();
+	        return mapper.writeValueAsString(soc);
+        }
+        catch (Exception e)
+        {
+        }
         return Integer.toString(ADMINRESET);
     }
 
@@ -58,6 +66,14 @@ public class SOCAdminReset extends SOCMessage
      */
     public static SOCAdminReset parseDataStr(String s)
     {
+        try
+        {
+        	SOCAdminReset soc = mapper.readValue(s, SOCAdminReset.class);
+        	return soc;
+        }
+        catch (Exception e)
+        {
+        }
         return new SOCAdminReset();
     }
 

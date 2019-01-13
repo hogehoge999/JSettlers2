@@ -23,8 +23,8 @@ import java.util.StringTokenizer;
 
 import soc.util.SOCFeatureSet;  // for javadocs only
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * This message sends the server's version and features, or client's version and locale,
@@ -55,19 +55,16 @@ public class SOCVersion extends SOCMessage
     /**
      * Version display string, as in {@link soc.util.Version#version()}
      */
-    @JsonProperty
     private String versStr;
 
     /**
      * Version number, as in {@link soc.util.Version#versionNumber()}
      */
-    @JsonProperty
     private int versNum;
 
     /**
      * Version build, or null, as in {@link soc.util.Version#buildnum()}
      */
-    @JsonProperty
     private String versBuild;
 
     /**
@@ -76,7 +73,6 @@ public class SOCVersion extends SOCMessage
      * See class javadoc for handling older servers or clients when this field is null.
      * @since 1.1.19
      */
-    @JsonProperty
     public final String feats;
 
     /**
@@ -85,7 +81,6 @@ public class SOCVersion extends SOCMessage
      * See class javadoc for handling older clients when this field is null.
      * @since 2.0.00
      */
-    @JsonProperty
     public final String cliLocale;
 
     /**
@@ -103,8 +98,9 @@ public class SOCVersion extends SOCMessage
      * @throws IllegalArgumentException if {@code verBuild} is null and {@code feats} != null;
      *     not supported by message encoding to clients older than 2.0.00.
      */
+    @JsonCreator
     public SOCVersion
-        (final int verNum, final String verStr, final String verBuild, final String feats, final String cliLocale)
+        (@JsonProperty("versNum") final int verNum, @JsonProperty("versStr") final String verStr, @JsonProperty("versBuild")final String verBuild, @JsonProperty("feats") final String feats, @JsonProperty("cliLocale") final String cliLocale)
         throws IllegalArgumentException
     {
         if ((verBuild == null) && (feats != null))
@@ -183,7 +179,6 @@ public class SOCVersion extends SOCMessage
         try
         {
 	        SOCVersion socVersion = new SOCVersion(verNum, verStr, verBuild, feats, cliLocale);
-	        ObjectMapper mapper = new ObjectMapper();
 	        return mapper.writeValueAsString(socVersion);
         }
         catch (Exception e)
@@ -211,7 +206,6 @@ public class SOCVersion extends SOCMessage
 
         try
         {
-        	ObjectMapper mapper = new ObjectMapper();
         	SOCVersion socver = mapper.readValue(s, SOCVersion.class);
         	return socver;
         }

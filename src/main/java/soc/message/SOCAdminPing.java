@@ -20,6 +20,9 @@
  **/
 package soc.message;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * This message is a way for the admin to test
@@ -45,7 +48,8 @@ public class SOCAdminPing extends SOCMessage
      *
      * @param ga  name of game
      */
-    public SOCAdminPing(String ga)
+    @JsonCreator
+    public SOCAdminPing(@JsonProperty("game")String ga)
     {
         messageType = ADMINPING;
         game = ga;
@@ -77,6 +81,15 @@ public class SOCAdminPing extends SOCMessage
      */
     public static String toCmd(String ga)
     {
+        try
+        {
+        	SOCAdminPing soc = new SOCAdminPing(ga);
+	        return mapper.writeValueAsString(soc);
+        }
+        catch (Exception e)
+        {
+        }
+
         return ADMINPING + sep + ga;
     }
 
@@ -88,6 +101,14 @@ public class SOCAdminPing extends SOCMessage
      */
     public static SOCAdminPing parseDataStr(String s)
     {
+        try
+        {
+        	SOCAdminPing soc = mapper.readValue(s, SOCAdminPing.class);
+        	return soc;
+        }
+        catch (Exception e)
+        {
+        }
         return new SOCAdminPing(s);
     }
 

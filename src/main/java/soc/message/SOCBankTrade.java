@@ -20,11 +20,14 @@
  **/
 package soc.message;
 
+import java.util.StringTokenizer;
+
 import soc.game.SOCResourceConstants;
 import soc.game.SOCResourceSet;
 import soc.util.SOCStringManager;  // javadocs only
 
-import java.util.StringTokenizer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -84,7 +87,8 @@ public class SOCBankTrade extends SOCMessage
      * @param pn   the player number making the trade, or -1 to send a request from client.
      *     Not sent if &lt; 0. Versions older than 2.0.00 ignore this field.
      */
-    public SOCBankTrade(String ga, SOCResourceSet give, SOCResourceSet get, final int pn)
+    @JsonCreator
+    public SOCBankTrade(@JsonProperty("game")String ga, @JsonProperty("give")SOCResourceSet give, @JsonProperty("get")SOCResourceSet get, @JsonProperty("playerNumber")final int pn)
     {
         messageType = BANKTRADE;
         game = ga;
@@ -132,6 +136,14 @@ public class SOCBankTrade extends SOCMessage
      */
     public String toCmd()
     {
+        try
+        {
+        	SOCBankTrade soc = new SOCBankTrade(game, give, get, playerNumber);
+	        return mapper.writeValueAsString(soc);
+        }
+        catch (Exception e)
+        {
+        }
         StringBuilder cmd = new StringBuilder(BANKTRADE + sep + game);
 
         for (int i = SOCResourceConstants.CLAY; i <= SOCResourceConstants.WOOD;
@@ -172,6 +184,15 @@ public class SOCBankTrade extends SOCMessage
 
         give = new SOCResourceSet();
         get = new SOCResourceSet();
+        try
+        {
+        	SOCBankTrade soc = mapper.readValue(s, SOCBankTrade.class);
+        	return soc;
+        }
+        catch (Exception e)
+        {
+        }
+
 
         StringTokenizer st = new StringTokenizer(s, sep2);
 

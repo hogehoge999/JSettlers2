@@ -22,6 +22,9 @@ package soc.message;
 
 import java.util.StringTokenizer;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Authentication request, to connect and check password before creating or joining a game or channel.
  *<P>
@@ -127,7 +130,8 @@ public class SOCAuthRequest extends SOCMessage
      * @throws IllegalArgumentException if {@code ro}, {@code nn}, or {@code hn} contains a delimiter character
      *     or is null or otherwise doesn't pass {@link SOCMessage#isSingleLineAndSafe(String)}
      */
-    public SOCAuthRequest(final String ro, final String nn, final String pw, final int sch, final String hn)
+    @JsonCreator
+    public SOCAuthRequest(@JsonProperty("role")final String ro, @JsonProperty("nickname")final String nn, @JsonProperty("password")final String pw, @JsonProperty("authscheme")final int sch, @JsonProperty("host")final String hn)
         throws IllegalArgumentException
     {
         if (! SOCMessage.isSingleLineAndSafe(ro))
@@ -178,6 +182,15 @@ public class SOCAuthRequest extends SOCMessage
         if ((hn != null) && ! SOCMessage.isSingleLineAndSafe(hn))
             throw new IllegalArgumentException("hostname: " + hn);
 
+        try
+        {
+        	SOCAuthRequest soc = new SOCAuthRequest(ro, nn, pw, sch, hn);
+	        return mapper.writeValueAsString(soc);
+        }
+        catch (Exception e)
+        {
+        }
+
         return AUTHREQUEST + sep + ro + sep2 + nn + sep2 + sch + sep2
             + (((hn != null) && (hn.length() > 0)) ? hn : EMPTYSTR)
             + sep2 + pw;
@@ -199,6 +212,14 @@ public class SOCAuthRequest extends SOCMessage
         int sch;
         String hn, pw;
 
+        try
+        {
+        	SOCAuthRequest soc = mapper.readValue(s, SOCAuthRequest.class);
+        	return soc;
+        }
+        catch (Exception e)
+        {
+        }
         StringTokenizer st = new StringTokenizer(s, sep2);
 
         try

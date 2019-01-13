@@ -22,6 +22,9 @@ package soc.message;
 
 import java.util.StringTokenizer;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * This message means that the player is accepting an offer.
@@ -69,7 +72,8 @@ public class SOCAcceptOffer extends SOCMessage
      *     Sent from server, ignored if sent from client.
      * @param of  the player number of the offering player
      */
-    public SOCAcceptOffer(String ga, int ac, int of)
+    @JsonCreator
+    public SOCAcceptOffer(@JsonProperty("game") String ga, @JsonProperty("accepting")int ac, @JsonProperty("offering")int of)
     {
         messageType = ACCEPTOFFER;
         game = ga;
@@ -127,6 +131,15 @@ public class SOCAcceptOffer extends SOCMessage
      */
     public static String toCmd(String ga, int ac, int of)
     {
+        try
+        {
+        	SOCAcceptOffer socAcceptOffer = new SOCAcceptOffer(ga, ac, of);
+	        return mapper.writeValueAsString(socAcceptOffer);
+        }
+        catch (Exception e)
+        {
+        }
+
         return ACCEPTOFFER + sep + ga + sep2 + ac + sep2 + of;
     }
 
@@ -142,6 +155,15 @@ public class SOCAcceptOffer extends SOCMessage
         int ac; // the number of the accepting player
         int of; //the number of the offering player
 
+        try
+        {
+        	SOCAcceptOffer socAcceptOffer = mapper.readValue(s, SOCAcceptOffer.class);
+        	return socAcceptOffer;
+        }
+        catch (Exception e)
+        {
+        	;
+        }
         StringTokenizer st = new StringTokenizer(s, sep2);
 
         try

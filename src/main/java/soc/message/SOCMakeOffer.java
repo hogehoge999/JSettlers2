@@ -20,11 +20,14 @@
  **/
 package soc.message;
 
+import java.util.StringTokenizer;
+
 import soc.game.SOCResourceConstants;
 import soc.game.SOCResourceSet;
 import soc.game.SOCTradeOffer;
 
-import java.util.StringTokenizer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -55,7 +58,8 @@ public class SOCMakeOffer extends SOCMessage
      *    From server, this offer's {@link SOCTradeOffer#getFrom()} is the player number
      *    making the offer. From client, value of {@code of.getFrom()} is ignored at server.
      */
-    public SOCMakeOffer(String ga, SOCTradeOffer of)
+    @JsonCreator
+    public SOCMakeOffer(@JsonProperty("game") String ga, @JsonProperty("offer") SOCTradeOffer of)
     {
         messageType = MAKEOFFER;
         game = ga;
@@ -99,6 +103,15 @@ public class SOCMakeOffer extends SOCMessage
      */
     public static String toCmd(String ga, SOCTradeOffer of)
     {
+        try
+        {
+        	SOCMakeOffer socMakeOffer = new SOCMakeOffer(ga, of);
+	        return mapper.writeValueAsString(socMakeOffer);
+        }
+        catch (Exception e)
+        {
+        }
+
         String cmd = MAKEOFFER + sep + ga;
         cmd += (sep2 + of.getFrom());
 
@@ -141,6 +154,15 @@ public class SOCMakeOffer extends SOCMessage
         boolean[] to; // the players to which this trade is offered
         SOCResourceSet give; // the set of resources being asked for
         SOCResourceSet get; // the set of resources that the offerer wants in exchange
+        try
+        {
+        	SOCMakeOffer socMakeOffer = mapper.readValue(s, SOCMakeOffer.class);
+        	return socMakeOffer;
+        }
+        catch (Exception e)
+        {
+        	;
+        }
 
         give = new SOCResourceSet();
         get = new SOCResourceSet();

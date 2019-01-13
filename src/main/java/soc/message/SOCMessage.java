@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 
 /**
@@ -105,6 +109,7 @@ import java.util.StringTokenizer;
  *
  * @author Robert S Thomas
  */
+@JsonTypeInfo(use=Id.CLASS)
 public abstract class SOCMessage implements Serializable, Cloneable
 {
     private static final long serialVersionUID = 2000L;  // last structural change v2.0.00
@@ -451,6 +456,8 @@ public abstract class SOCMessage implements Serializable, Cloneable
      */
     public static final String GAME_NONE = "\026";  // 0x16 ^V (SYN)
 
+	protected static ObjectMapper mapper = new ObjectMapper();
+
     /**
      * An ID identifying the type of message
      */
@@ -583,6 +590,13 @@ public abstract class SOCMessage implements Serializable, Cloneable
      */
     public static SOCMessage toMsg(String s)
     {
+    	try
+    	{
+    		return mapper.readValue(s, SOCMessage.class);
+    	}
+    	catch(Exception e)
+    	{
+    	}
         try
         {
             StringTokenizer st = new StringTokenizer(s, sep);

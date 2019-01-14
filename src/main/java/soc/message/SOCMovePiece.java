@@ -21,6 +21,9 @@ package soc.message;
 
 import java.util.StringTokenizer;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Client player is asking to move, or server is announcing a move of,
  * a piece on the board to a new location. Currently, ships are the
@@ -54,7 +57,8 @@ public class SOCMovePiece extends SOCMessageTemplate4i
      * @param toCoord  move piece to this coordinate; must be >= 0
      * @throws IllegalArgumentException if {@code ptype} &lt; 0, {@code fromCoord} &lt; 0, or {@code toCoord} &lt; 0
      */
-    public SOCMovePiece(String ga, final int pn, final int ptype, final int fromCoord, final int toCoord)
+    @JsonCreator
+    public SOCMovePiece(@JsonProperty("game")String ga, @JsonProperty("p1")final int pn, @JsonProperty("p2")final int ptype, @JsonProperty("p3")final int fromCoord, @JsonProperty("p4")final int toCoord)
         throws IllegalArgumentException
     {
         super(MOVEPIECE, ga, pn, ptype, fromCoord, toCoord);

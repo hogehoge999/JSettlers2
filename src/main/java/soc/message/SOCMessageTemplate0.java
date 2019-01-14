@@ -20,6 +20,9 @@
  **/
 package soc.message;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * Template for per-game message types with no parameters.
@@ -53,7 +56,8 @@ public abstract class SOCMessageTemplate0 extends SOCMessage
      * @param id  Message type ID
      * @param ga  Name of game this message is for
      */
-    protected SOCMessageTemplate0(int id, String ga)
+    @JsonCreator
+    protected SOCMessageTemplate0(@JsonProperty("messageType")int id, @JsonProperty("game")String ga)
     {
         messageType = id;
         game = ga;
@@ -88,6 +92,15 @@ public abstract class SOCMessageTemplate0 extends SOCMessage
      */
     public static String toCmd(final int messageType, final String ga)
     {
+/*    	try
+	    {
+    		SOCMessageTemplate0 soc = new SOCMessageTemplate0(messageType, ga);
+	        return mapper.writeValueAsString(soc);
+	    }
+	    catch (Exception e)
+	    {
+	    }
+*/
         return Integer.toString(messageType) + sep + ga;
     }
 

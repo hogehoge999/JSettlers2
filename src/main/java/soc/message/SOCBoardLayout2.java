@@ -28,6 +28,9 @@ import soc.game.SOCBoardLarge;  // for javadocs
 import soc.game.SOCScenario;    // for javadocs
 import soc.util.DataUtils;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * This message contains the board's encoding version and layout information
@@ -137,7 +140,7 @@ public class SOCBoardLayout2 extends SOCMessage
      *               contents are not validated here, but contents not matching their keys' documented type
      *               may cause a ClassCastException later.
      */
-    public SOCBoardLayout2(String ga, int bef, Map<String, Object> parts)
+    public SOCBoardLayout2(@JsonProperty("game")String ga, int bef, Map<String, Object> parts)
     {
         messageType = BOARDLAYOUT2;
         game = ga;
@@ -158,7 +161,8 @@ public class SOCBoardLayout2 extends SOCMessage
      * @param pl   the port layout, or null
      * @param rh   the robber hex
      */
-    public SOCBoardLayout2(final String ga, final int bef, final int[] hl, final int[] nl, final int[] pl, final int rh)
+    @JsonCreator
+    public SOCBoardLayout2(@JsonProperty("game")final String ga, @JsonProperty("boardEncodingFormat")final int bef, @JsonProperty("hexLayout")final int[] hl, @JsonProperty("layoutParts")final int[] nl, @JsonProperty("layoutParts")final int[] pl, @JsonProperty("layoutParts")final int rh)
     {
         messageType = BOARDLAYOUT2;
         game = ga;

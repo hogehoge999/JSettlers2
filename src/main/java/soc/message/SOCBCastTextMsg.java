@@ -20,6 +20,9 @@
  **/
 package soc.message;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * This message contains a text message for everyone connected
@@ -40,7 +43,8 @@ public class SOCBCastTextMsg extends SOCMessage
      *
      * @param tm  text message
      */
-    public SOCBCastTextMsg(String tm)
+    @JsonCreator
+    public SOCBCastTextMsg(@JsonProperty("text") String tm)
     {
         messageType = BCASTTEXTMSG;
         text = tm;
@@ -72,6 +76,15 @@ public class SOCBCastTextMsg extends SOCMessage
      */
     public static String toCmd(String tm)
     {
+        try
+        {
+        	SOCBCastTextMsg socBCastTextMsg = new SOCBCastTextMsg(tm);
+	        return mapper.writeValueAsString(socBCastTextMsg);
+        }
+        catch (Exception e)
+        {
+        }
+
         return BCASTTEXTMSG + sep + tm;
     }
 
@@ -83,6 +96,15 @@ public class SOCBCastTextMsg extends SOCMessage
      */
     public static SOCBCastTextMsg parseDataStr(String s)
     {
+        try
+        {
+        	SOCBCastTextMsg socBCastTextMsg = mapper.readValue(s, SOCBCastTextMsg.class);
+        	return socBCastTextMsg;
+        }
+        catch (Exception e)
+        {
+        	;
+        }
         return new SOCBCastTextMsg(s);
     }
 

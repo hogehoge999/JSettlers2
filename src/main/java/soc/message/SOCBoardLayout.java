@@ -25,6 +25,9 @@ import java.util.StringTokenizer;
 import soc.game.SOCBoard;
 import soc.util.DataUtils;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * This message contains the board layout information: The hex layout, the
@@ -116,7 +119,8 @@ public class SOCBoardLayout extends SOCMessage
      *               range to the BOARDLAYOUT message's value range.
      * @param rh   the robber hex
      */
-    public SOCBoardLayout(String ga, int[] hl, int[] nl, int rh)
+    @JsonCreator
+    public SOCBoardLayout(@JsonProperty("game")String ga, @JsonProperty("hexLayout")final int[] hl, @JsonProperty("numberLayout")final int[] nl, @JsonProperty("robberHex")final int rh)
     {
         this(ga, hl, nl, rh, false);
     }
@@ -254,6 +258,15 @@ public class SOCBoardLayout extends SOCMessage
      */
     public static String toCmd(String ga, int[] hl, int[] nl, int rh)
     {
+        try
+        {
+        	SOCBoardLayout socBoardLayout = new SOCBoardLayout(ga, hl, nl, rh, true);
+	        return mapper.writeValueAsString(socBoardLayout);
+        }
+        catch (Exception e)
+        {
+        }
+
         String cmd = BOARDLAYOUT + sep + ga;
 
         for (int i = 0; i < 37; i++)
@@ -283,6 +296,14 @@ public class SOCBoardLayout extends SOCMessage
         int[] hl = new int[37]; // hex layout
         int[] nl = new int[37]; // number layout
         int rh; // robber hex
+        try
+        {
+        	SOCBoardLayout socBoardLayout = mapper.readValue(s, SOCBoardLayout.class);
+        	return socBoardLayout;
+        }
+        catch (Exception e)
+        {
+        }
         StringTokenizer st = new StringTokenizer(s, sep2);
 
         try
